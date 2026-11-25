@@ -54,14 +54,16 @@ type ghPullRequest struct {
 	RequestedTeams     []ghTeam  `json:"requested_teams"`
 	Head               ghRef     `json:"head"`
 	Base               ghRef     `json:"base"`
-	Additions          int       `json:"additions"`
-	Deletions          int       `json:"deletions"`
-	ChangedFiles       int       `json:"changed_files"`
-	Commits            int       `json:"commits"`
-	Comments           int       `json:"comments"`
-	ReviewComments     int       `json:"review_comments"`
-	CreatedAt          string    `json:"created_at"`
-	UpdatedAt          string    `json:"updated_at"`
+	// The counts below are absent from the pull request inside review and review comment
+	// payloads, so nil means unknown rather than zero.
+	Additions      *int   `json:"additions"`
+	Deletions      *int   `json:"deletions"`
+	ChangedFiles   *int   `json:"changed_files"`
+	Commits        *int   `json:"commits"`
+	Comments       *int   `json:"comments"`
+	ReviewComments *int   `json:"review_comments"`
+	CreatedAt      string `json:"created_at"`
+	UpdatedAt      string `json:"updated_at"`
 }
 
 type ghIssue struct {

@@ -102,6 +102,7 @@ func TestPullRequestLifecycle(t *testing.T) {
 	assert.Equal(t, ciSuccess, c.ciStatus())
 	assert.Equal(t, []Review{{Reviewer: Person{Login: "octocat", AvatarURL: c.Reviews[0].Reviewer.AvatarURL, URL: c.Reviews[0].Reviewer.URL}, State: "approved", URL: c.Reviews[0].URL}}, c.Reviews)
 	assert.Equal(t, "octocat", c.MergedBy.Login)
+	assert.Equal(t, 1, c.ChangedFiles, "review payloads omit diff counts; the card keeps them")
 	assert.Contains(t, roots[0].Message, "**Merged** pull request by Codertocat")
 	assert.Equal(t, "merged", roots[0].GetProp(propCard).(map[string]any)["state"])
 }

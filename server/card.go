@@ -78,20 +78,20 @@ type LinkedPR struct {
 // Card is the full state of one pull request or issue card. It is stored in KV and copied
 // into the root post's props, where the webapp renders it.
 type Card struct {
-	Version     int    `json:"v"`
-	Kind        string `json:"kind"`
-	Repo        string `json:"repo"`
-	RepoURL     string `json:"repo_url"`
-	RepoID      int64  `json:"repo_id"`
-	Number      int    `json:"number"`
-	Title       string `json:"title"`
-	URL         string `json:"url"`
-	Author      Person `json:"author"`
-	State       string `json:"state"`
-	SnapshotAt  string `json:"snapshot_at,omitempty"`
-	Labels      []Label  `json:"labels,omitempty"`
-	Assignees   []Person `json:"assignees,omitempty"`
-	Comments    int      `json:"comments"`
+	Version    int      `json:"v"`
+	Kind       string   `json:"kind"`
+	Repo       string   `json:"repo"`
+	RepoURL    string   `json:"repo_url"`
+	RepoID     int64    `json:"repo_id"`
+	Number     int      `json:"number"`
+	Title      string   `json:"title"`
+	URL        string   `json:"url"`
+	Author     Person   `json:"author"`
+	State      string   `json:"state"`
+	SnapshotAt string   `json:"snapshot_at,omitempty"`
+	Labels     []Label  `json:"labels,omitempty"`
+	Assignees  []Person `json:"assignees,omitempty"`
+	Comments   int      `json:"comments"`
 
 	// Pull request only.
 	Head               string   `json:"head,omitempty"`
@@ -247,8 +247,12 @@ func (c *Card) applyPR(pr *ghPullRequest) {
 	for _, t := range pr.RequestedTeams {
 		c.RequestedReviewers = append(c.RequestedReviewers, Person{Login: t.Slug, URL: t.HTMLURL, IsTeam: true})
 	}
-	c.Additions, c.Deletions, c.ChangedFiles, c.Commits = pr.Additions, pr.Deletions, pr.ChangedFiles, pr.Commits
-	c.IssueComments, c.ReviewComments = pr.Comments, pr.ReviewComments
+	setIfKnown(&c.Additions, pr.Additions)
+	setIfKnown(&c.Deletions, pr.Deletions)
+	setIfKnown(&c.ChangedFiles, pr.ChangedFiles)
+	setIfKnown(&c.Commits, pr.Commits)
+	setIfKnown(&c.IssueComments, pr.Comments)
+	setIfKnown(&c.ReviewComments, pr.ReviewComments)
 	c.Comments = c.IssueComments + c.ReviewComments
 	if pr.MergedBy != nil {
 		p := pr.MergedBy.person()
@@ -256,6 +260,13 @@ func (c *Card) applyPR(pr *ghPullRequest) {
 	}
 	c.MergeCommitSHA = pr.MergeCommitSHA
 	c.ClosesIssues = closingRefs(pr.Body, c.Repo)
+}
+
+// setIfKnown copies a count the payload carries and keeps the old one when it does not.
+func setIfKnown(dst, src *int) {
+	if src != nil {
+		*dst = *src
+	}
 }
 
 // applyIssue copies an issue snapshot onto the card. On a pull request card only the fields an
