@@ -1,0 +1,14 @@
+{
+  "disable_group_highlight": true,
+  "ghc_event": {
+    "actor": {
+      "login": ""
+    },
+    "context": "CI on `ec26c3e` (failure)",
+    "kind": "ci_failed",
+    "tone": "failure",
+    "total_commits": 0,
+    "url": "https://github.com/Codertocat/Hello-World/actions/runs/1",
+    "verb": "failed"
+  }
+}

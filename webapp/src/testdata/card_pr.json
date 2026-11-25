@@ -1,0 +1,84 @@
+{
+  "disable_group_highlight": true,
+  "ghc_card": {
+    "additions": 1,
+    "assignees": [
+      {
+        "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
+        "login": "Codertocat",
+        "url": "https://github.com/Codertocat"
+      }
+    ],
+    "author": {
+      "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
+      "login": "Codertocat",
+      "url": "https://github.com/Codertocat"
+    },
+    "base": "master",
+    "changed_files": 1,
+    "checks": [
+      {
+        "attempt": 1,
+        "conclusion": "failure",
+        "name": "CI",
+        "run_id": 100,
+        "status": "completed",
+        "url": "https://github.com/Codertocat/Hello-World/actions/runs/1",
+        "workflow_id": 1
+      },
+      {
+        "attempt": 1,
+        "conclusion": "success",
+        "name": "Lint",
+        "run_id": 101,
+        "status": "completed",
+        "url": "https://github.com/Codertocat/Hello-World/actions/runs/1",
+        "workflow_id": 2
+      }
+    ],
+    "closes_issues": [
+      1
+    ],
+    "comments": 0,
+    "commits": 1,
+    "deletions": 1,
+    "head": "changes",
+    "head_sha": "ec26c3e57ca3a959ca5aad62de7213c562f8c821",
+    "kind": "pr",
+    "labels": [
+      {
+        "color": "d73a4a",
+        "name": "bug"
+      }
+    ],
+    "last_ci_outcome": "failure",
+    "merge_commit_sha": "c4295bd74fb0f4fda03689c3df3f2803b658fd85",
+    "number": 2,
+    "repo": "Codertocat/Hello-World",
+    "repo_id": 186853002,
+    "repo_url": "https://github.com/Codertocat/Hello-World",
+    "requested_reviewers": [
+      {
+        "avatar_url": "http://alambic.github.com/avatars/u/5346?",
+        "login": "octocat",
+        "url": "http://github.com/octocat"
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": {
+          "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
+          "login": "Codertocat",
+          "url": "https://github.com/Codertocat"
+        },
+        "state": "changes_requested",
+        "url": "https://github.com/Codertocat/Hello-World/pull/2#pullrequestreview-237895671"
+      }
+    ],
+    "snapshot_at": "2019-05-15T15:20:40Z",
+    "state": "open",
+    "title": "Update the README with new information.",
+    "url": "https://github.com/Codertocat/Hello-World/pull/2",
+    "v": 1
+  }
+}

@@ -25,14 +25,14 @@
                 "display_name": "Webhook secrets:",
                 "type": "longtext",
                 "secret": true,
-                "help_text": "One line per GitHub org or user that owns the repositories: `org = secret`. Each secret must be at least 16 characters and match the webhook's secret on GitHub.",
+                "help_text": "One line per GitHub org or user that owns the repositories: 'org = secret'. Each secret must be at least 16 characters and match the webhook's secret on GitHub.",
                 "default": ""
             },
             {
                 "key": "Routes",
                 "display_name": "Routes:",
                 "type": "longtext",
-                "help_text": "One line per destination: `org -> team/channel` or `org/repo -> team/channel`, using the names in the channel URL. A repository's own lines win over its org's lines. Options after the channel: `events=pull_request,pull_request_review,pull_request_review_comment,issue_comment,issues,workflow_run,push` (default all) and `bots=include` to post comments from bot accounts (default: their comments are left out). Lines starting with # are ignored. The plugin will not start while a line is malformed or names a channel that does not exist.",
+                "help_text": "One line per destination: 'org -> team/channel' or 'org/repo -> team/channel', using the names in the channel URL. A repository's own lines win over its org's lines. Options after the channel: 'events=pull_request,pull_request_review,pull_request_review_comment,issue_comment,issues,workflow_run,push' (default all) and 'bots=include' to post comments from bot accounts (default: their comments are left out). Lines starting with # are ignored. The plugin will not start while a line is malformed or names a channel that does not exist.",
                 "default": ""
             }
         ]

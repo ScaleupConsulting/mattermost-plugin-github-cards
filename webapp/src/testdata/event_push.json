@@ -1,0 +1,25 @@
+{
+  "disable_group_highlight": true,
+  "ghc_event": {
+    "actor": {
+      "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
+      "login": "Codertocat",
+      "url": "https://github.com/Codertocat"
+    },
+    "commits": [
+      {
+        "author": "Codertocat",
+        "message": "Initial commit",
+        "sha": "6113728f27ae82c7b1a177c8d03f9e96e0adf246",
+        "url": "https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246"
+      }
+    ],
+    "kind": "push",
+    "repo": "Codertocat/Hello-World",
+    "repo_url": "https://github.com/Codertocat/Hello-World",
+    "tone": "push",
+    "total_commits": 1,
+    "url": "https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246",
+    "verb": "pushed 1 commit to `master`"
+  }
+}

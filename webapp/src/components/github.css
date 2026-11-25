@@ -1,0 +1,416 @@
+/* Card and event styles. Colours come from the Mattermost theme except GitHub's state colours. */
+
+.ghc-card {
+    --ghc-border: rgba(var(--center-channel-color-rgb), 0.16);
+    --ghc-muted: rgba(var(--center-channel-color-rgb), 0.64);
+    --ghc-subtle: rgba(var(--center-channel-color-rgb), 0.04);
+    --ghc-success: #1a7f37;
+    --ghc-failure: #cf222e;
+    --ghc-pending: #9a6700;
+    --ghc-merged: #8250df;
+
+    max-width: 680px;
+    margin: 4px 0;
+    padding: 12px 16px 12px 14px;
+    border: 1px solid var(--ghc-border);
+    border-left-width: 4px;
+    border-radius: 8px;
+    background: var(--center-channel-bg);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08);
+    color: var(--center-channel-color);
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.ghc-card a,
+.ghc-event a {
+    text-decoration: none;
+}
+
+.ghc-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ghc-muted);
+    font-size: 12px;
+}
+
+.ghc-kind {
+    display: inline-flex;
+}
+
+.ghc-repo {
+    color: var(--ghc-muted) !important;
+    font-weight: 600;
+}
+
+.ghc-repo:hover {
+    text-decoration: underline;
+}
+
+.ghc-state {
+    margin-left: auto;
+    padding: 1px 10px;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.ghc-title {
+    display: block;
+    margin: 4px 0 6px;
+    color: var(--center-channel-color) !important;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    overflow-wrap: anywhere;
+}
+
+.ghc-title:hover {
+    color: var(--link-color) !important;
+}
+
+.ghc-byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    color: var(--ghc-muted);
+}
+
+.ghc-strong {
+    color: var(--center-channel-color);
+    font-weight: 600;
+}
+
+.ghc-branch {
+    padding: 0 5px;
+    border-radius: 6px;
+    background: rgba(var(--button-bg-rgb), 0.08);
+    color: var(--link-color);
+    font-size: 12px;
+}
+
+.ghc-diff {
+    display: inline-flex;
+    gap: 6px;
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ghc-add {
+    color: var(--ghc-success);
+}
+
+.ghc-del {
+    color: var(--ghc-failure);
+}
+
+.ghc-muted {
+    color: var(--ghc-muted);
+    font-weight: 400;
+}
+
+.ghc-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.ghc-row-label {
+    flex: 0 0 58px;
+    padding-top: 3px;
+    color: var(--ghc-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.ghc-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+}
+
+.ghc-chip,
+.ghc-ci,
+.ghc-link-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px 2px 3px;
+    border: 1px solid var(--ghc-border);
+    border-radius: 14px;
+    background: var(--ghc-subtle);
+    color: var(--center-channel-color) !important;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.ghc-ci,
+.ghc-link-chip {
+    padding-left: 8px;
+}
+
+.ghc-chip:hover,
+.ghc-link-chip:hover {
+    border-color: rgba(var(--center-channel-color-rgb), 0.32);
+}
+
+.ghc-chip-name {
+    font-weight: 600;
+}
+
+.ghc-chip-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.ghc-tone-approved .ghc-chip-status,
+.ghc-tone-success .ghc-chip-status,
+.ghc-ci.ghc-tone-success {
+    color: var(--ghc-success);
+}
+
+.ghc-tone-changes_requested .ghc-chip-status,
+.ghc-tone-failure .ghc-chip-status,
+.ghc-ci.ghc-tone-failure {
+    color: var(--ghc-failure);
+}
+
+.ghc-tone-requested .ghc-chip-status,
+.ghc-tone-pending .ghc-chip-status,
+.ghc-ci.ghc-tone-pending {
+    color: var(--ghc-pending);
+}
+
+.ghc-tone-commented .ghc-chip-status,
+.ghc-tone-dismissed .ghc-chip-status,
+.ghc-tone-neutral .ghc-chip-status {
+    color: var(--ghc-muted);
+}
+
+.ghc-ci {
+    font-weight: 600;
+}
+
+.ghc-ci.ghc-tone-success {
+    border-color: rgba(26, 127, 55, 0.4);
+    background: rgba(26, 127, 55, 0.08);
+}
+
+.ghc-ci.ghc-tone-failure {
+    border-color: rgba(207, 34, 46, 0.4);
+    background: rgba(207, 34, 46, 0.08);
+}
+
+.ghc-ci.ghc-tone-pending {
+    border-color: rgba(154, 103, 0, 0.4);
+    background: rgba(154, 103, 0, 0.08);
+}
+
+.ghc-ci code {
+    padding: 0 4px;
+    background: transparent;
+    color: var(--ghc-muted);
+    font-weight: 400;
+}
+
+.ghc-label {
+    padding: 0 9px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+.ghc-assignees {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 4px;
+    font-size: 12px;
+}
+
+.ghc-assignee {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ghc-avatar {
+    display: inline-block;
+    flex: none;
+    border-radius: 50%;
+    background: rgba(var(--center-channel-color-rgb), 0.12);
+    object-fit: cover;
+}
+
+.ghc-avatar-letter {
+    color: var(--ghc-muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.ghc-footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.ghc-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    background: var(--button-bg);
+    color: var(--button-color) !important;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ghc-button:hover {
+    background: rgba(var(--button-bg-rgb), 0.88);
+}
+
+.ghc-comments {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+}
+
+/* Thread replies */
+
+.ghc-event {
+    --ghc-tone: rgba(var(--center-channel-color-rgb), 0.56);
+
+    max-width: 680px;
+    color: var(--center-channel-color);
+}
+
+.ghc-event.ghc-tone-approved,
+.ghc-event.ghc-tone-success {
+    --ghc-tone: #1a7f37;
+}
+
+.ghc-event.ghc-tone-changes_requested,
+.ghc-event.ghc-tone-failure,
+.ghc-event.ghc-tone-closed {
+    --ghc-tone: #cf222e;
+}
+
+.ghc-event.ghc-tone-merged,
+.ghc-event.ghc-tone-not_planned {
+    --ghc-tone: #8250df;
+}
+
+.ghc-event.ghc-tone-open {
+    --ghc-tone: #1a7f37;
+}
+
+.ghc-event.ghc-tone-push {
+    --ghc-tone: var(--button-bg);
+}
+
+.ghc-event-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ghc-event-badge {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ghc-tone);
+    color: #ffffff;
+}
+
+.ghc-event-line {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+}
+
+.ghc-event-verb p,
+.ghc-event-context p {
+    display: inline;
+    margin: 0;
+}
+
+.ghc-event-verb {
+    color: rgba(var(--center-channel-color-rgb), 0.72);
+}
+
+.ghc-event-link {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 3px;
+    margin-left: auto;
+    color: rgba(var(--center-channel-color-rgb), 0.56) !important;
+    font-size: 12px;
+}
+
+.ghc-event-link:hover {
+    color: var(--link-color) !important;
+}
+
+.ghc-event-body {
+    margin: 6px 0 2px 32px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--ghc-tone);
+    border-radius: 0 6px 6px 0;
+    background: rgba(var(--center-channel-color-rgb), 0.04);
+    overflow-wrap: anywhere;
+}
+
+.ghc-event-body p:last-child {
+    margin-bottom: 0;
+}
+
+.ghc-commits {
+    margin: 6px 0 0 32px;
+    padding: 0;
+    list-style: none;
+}
+
+.ghc-commits li {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    min-width: 0;
+}
+
+.ghc-sha {
+    flex: none;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 12px;
+}
+
+.ghc-commit-msg {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ghc-plain {
+    white-space: pre-wrap;
+}
