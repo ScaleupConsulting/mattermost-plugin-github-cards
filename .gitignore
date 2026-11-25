@@ -17,3 +17,6 @@ coverage.txt
 
 # VS Code
 .vscode
+
+# e2e run output
+e2e/out/

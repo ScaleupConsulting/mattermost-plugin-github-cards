@@ -1,0 +1,30 @@
+# Throwaway Mattermost 12.0.2 for the GitHub Cards e2e. Project name ghc-e2e, own network, loopback port 18165.
+name: ghc-e2e
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: mmuser
+      POSTGRES_PASSWORD: fake-e2e-db-password
+      POSTGRES_DB: mattermost
+    tmpfs:
+      - /var/lib/postgresql/data
+    networks: [ghc]
+  mattermost:
+    image: mattermost/mattermost-team-edition:12.0.2
+    depends_on: [db]
+    environment:
+      MM_SQLSETTINGS_DRIVERNAME: postgres
+      MM_SQLSETTINGS_DATASOURCE: postgres://mmuser:fake-e2e-db-password@db:5432/mattermost?sslmode=disable&connect_timeout=10
+      MM_SERVICESETTINGS_SITEURL: http://localhost:18165
+      MM_SERVICESETTINGS_ENABLELOCALMODE: "true"
+      MM_PLUGINSETTINGS_ENABLEUPLOADS: "true"
+      MM_LOGSETTINGS_CONSOLELEVEL: DEBUG
+      MM_TEAMSETTINGS_ENABLEOPENSERVER: "true"
+      MM_SERVICESETTINGS_ENABLEONBOARDINGFLOW: "false"
+    ports:
+      - "127.0.0.1:18165:8065"
+    networks: [ghc]
+networks:
+  ghc:
+    name: ghc-e2e-net

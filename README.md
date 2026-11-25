@@ -14,10 +14,16 @@ Turns signed GitHub webhooks into one live card per pull request or issue. Requi
 1. Build with `build/docker-build.sh` (needs only Docker), then upload `dist/com.scaleupconsulting.githubcards-<version>.tar.gz` in System Console > Plugins > Plugin Management.
 2. Under System Console > Plugins > GitHub Cards, add one line per GitHub org to **Webhook secrets** (`org = secret`, at least 16 characters) and one line per destination to **Routes**:
    ```
-   Jalihr/jalihr -> jali-hr/github
-   flatmate-com -> flatmate/bots events=pull_request,pull_request_review,workflow_run bots=include
+   acme/webapp -> engineering/github
+   acme -> engineering/bots events=pull_request,pull_request_review,workflow_run bots=include
    ```
    The plugin's bot, `github-cards`, joins each routed team and channel itself.
 3. On GitHub, add an org (or repository) webhook: payload URL `https://<your Mattermost>/plugins/com.scaleupconsulting.githubcards/webhook`, content type `application/json`, the same secret, and the events Issues, Issue comments, Pull requests, Pull request reviews, Pull request review comments, Workflow runs and Pushes.
 
 Deliveries without a valid `X-Hub-Signature-256` get 401. Each `X-GitHub-Delivery` is processed once; a delivery that fails is forgotten, so GitHub's Redeliver button retries it.
+
+## Tests
+
+- `go test ./server/...` covers signature checks, config parsing and routing, state reduction and the markdown fallback, using GitHub's own example payloads in `server/testdata/github`. It also writes the post props the webapp tests render (`UPDATE_GOLDEN=1` refreshes them).
+- `cd webapp && npm test` renders those props.
+- After `build/docker-build.sh`, `cd e2e && npm install && npm run e2e` starts a throwaway Mattermost 12.0.2 in Docker (compose project `ghc-e2e`, port 18165 on loopback), installs the bundle, posts a signed issue and pull request lifecycle to the webhook, records the channel in Chromium and burns captions into `e2e/out/github-cards-e2e.mp4`. Remove it afterwards with `docker compose -f e2e/compose.yml down -v`.

@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "description": "End-to-end run of GitHub Cards against a throwaway Mattermost in Docker",
+  "scripts": {
+    "e2e": "./setup.sh && node drive.js out && node burn.js out out/github-cards-e2e.mp4"
+  },
+  "devDependencies": {
+    "playwright": "1.57.0"
+  }
+}
