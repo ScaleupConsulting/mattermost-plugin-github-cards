@@ -94,7 +94,7 @@ func (h *processor) processCard(event string, e *ghEvent, r route, number int) e
 		return nil
 	}
 	rec.Card = fx.card
-	if err := h.saveCard(key, r.channelID, &rec, before); err != nil {
+	if err = h.saveCard(key, r.channelID, &rec, before); err != nil {
 		unlock()
 		return err
 	}

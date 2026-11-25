@@ -8,24 +8,24 @@ import (
 )
 
 func TestParseConfiguration(t *testing.T) {
-	c := &configuration{
-		WebhookSecrets: "# comment\nJalihr = fake-jalihr-secret-0001\nflatmate-com=fake-flatmate-secret-0002\n",
+	c := &configuration{ //nolint:gosec // fake secrets for the parser
+		WebhookSecrets: "# comment\nacme = fake-acme-secret-00000001\nglobex=fake-globex-secret-0000002\n",
 		Routes: `
-# JaliHR
-Jalihr/jalihr -> jali-hr/github
-Jalihr -> jali-hr/github-other events=push
-flatmate-com -> flatmate/bots events=pull_request,workflow_run bots=include
+# acme
+acme/webapp -> engineering/github
+acme -> engineering/github-other events=push
+globex -> globex/bots events=pull_request,workflow_run bots=include
 `,
 	}
 	require.NoError(t, parseConfiguration(c))
-	assert.Equal(t, "fake-jalihr-secret-0001", c.secrets["jalihr"])
+	assert.Equal(t, "fake-acme-secret-00000001", c.secrets["acme"])
 	require.Len(t, c.routes, 3)
 
 	r := c.routes[0]
 	assert.Equal(t, 3, r.Line)
-	assert.Equal(t, "jalihr", r.Owner)
-	assert.Equal(t, "jalihr", r.Repo)
-	assert.Equal(t, "jali-hr", r.TeamName)
+	assert.Equal(t, "acme", r.Owner)
+	assert.Equal(t, "webapp", r.Repo)
+	assert.Equal(t, "engineering", r.TeamName)
 	assert.Equal(t, "github", r.ChannelName)
 	assert.Len(t, r.Events, len(supportedEvents), "default is every event")
 	assert.False(t, r.IncludeBots, "bot comments are left out by default")
@@ -35,10 +35,10 @@ flatmate-com -> flatmate/bots events=pull_request,workflow_run bots=include
 	assert.True(t, f.IncludeBots)
 
 	// A repo's own route wins over its org's; another repo in the org gets the org route.
-	got := c.matchRoutes("JALIHR/Jalihr")
+	got := c.matchRoutes("ACME/Webapp")
 	require.Len(t, got, 1)
 	assert.Equal(t, "github", got[0].ChannelName)
-	got = c.matchRoutes("Jalihr/website")
+	got = c.matchRoutes("acme/website")
 	require.Len(t, got, 1)
 	assert.Equal(t, "github-other", got[0].ChannelName)
 	assert.Empty(t, c.matchRoutes("someone/else"))
@@ -46,8 +46,8 @@ flatmate-com -> flatmate/bots events=pull_request,workflow_run bots=include
 
 func TestParseConfigurationErrors(t *testing.T) {
 	cases := map[string]struct{ secrets, routes, want string }{
-		"secret without equals":  {"Jalihr fake-secret-0000000001", "", "webhook secrets line 1: expected `org = secret`"},
-		"short secret":           {"Jalihr = short", "", "at least 16 characters"},
+		"secret without equals":  {"acme fake-secret-0000000001", "", "webhook secrets line 1: expected `org = secret`"},
+		"short secret":           {"acme = short", "", "at least 16 characters"},
 		"duplicate secret":       {"a = fake-secret-0000000001\nA = fake-secret-0000000002", "", `line 2: "a" has a second secret`},
 		"route without arrow":    {"a = fake-secret-0000000001", "a team/chan", "routes line 1: expected"},
 		"route without channel":  {"a = fake-secret-0000000001", "a -> team", "must be `team/channel`"},

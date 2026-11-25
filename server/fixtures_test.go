@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"sort"
@@ -19,7 +20,7 @@ import (
 // rawFixture loads a payload as a generic map so a test can patch it.
 func rawFixture(t *testing.T, name string) map[string]any {
 	t.Helper()
-	data, err := os.ReadFile(filepath.Join("testdata", "github", name))
+	data, err := fs.ReadFile(os.DirFS(filepath.Join("testdata", "github")), name)
 	require.NoError(t, err)
 	var m map[string]any
 	require.NoError(t, json.Unmarshal(data, &m))
@@ -54,7 +55,7 @@ func toEvent(t *testing.T, m map[string]any) (*ghEvent, []byte) {
 func fixture(t *testing.T, name string, patches ...any) *ghEvent {
 	t.Helper()
 	m := rawFixture(t, name)
-	for i := 0; i < len(patches); i += 2 {
+	for i := 0; i+1 < len(patches); i += 2 {
 		set(m, patches[i].(string), patches[i+1])
 	}
 	e, _ := toEvent(t, m)

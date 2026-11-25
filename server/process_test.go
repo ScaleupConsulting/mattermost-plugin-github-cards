@@ -94,7 +94,7 @@ func TestPullRequestLifecycle(t *testing.T) {
 	merged := f.thread(root.Id)[3].Message
 	assert.Contains(t, merged, "**octocat** merged `changes` into `master` as [`c4295bd`](https://github.com/Codertocat/Hello-World/commit/c4295bd74fb0f4fda03689c3df3f2803b658fd85)")
 	review := f.thread(root.Id)[0].Message
-	assert.Contains(t, review, "@⁠channel", "group mention is defused")
+	assert.Contains(t, review, "@\u2060channel", "group mention is defused")
 	assert.NotContains(t, review, "@channel")
 
 	c := cardOf(t, f, key)

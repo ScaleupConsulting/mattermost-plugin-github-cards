@@ -45,7 +45,7 @@ func TestTitleIsEscaped(t *testing.T) {
 
 func TestReplyMarkdown(t *testing.T) {
 	r := &Reply{Kind: replyReview, Actor: Person{Login: "octocat"}, Verb: "approved", Tone: "approved", Body: "Ship it @here", URL: "https://g/r"}
-	assert.Equal(t, ":white_check_mark: **octocat** approved · [view on GitHub](https://g/r)\n\nShip it @⁠here", replyMarkdown(r))
+	assert.Equal(t, ":white_check_mark: **octocat** approved · [view on GitHub](https://g/r)\n\nShip it @\u2060here", replyMarkdown(r))
 
 	long := &Reply{Kind: replyComment, Actor: Person{Login: "a"}, Verb: "commented", Tone: "commented", Body: strings.Repeat("é", 2000), URL: "https://g/c"}
 	md := replyMarkdown(long)
@@ -57,7 +57,7 @@ func TestReplyMarkdown(t *testing.T) {
 }
 
 func TestQuietMentions(t *testing.T) {
-	assert.Equal(t, "hi @⁠bob and @⁠channel, mail a@b.c", quietMentions("hi @bob and @channel, mail a@b.c"))
+	assert.Equal(t, "hi @\u2060bob and @\u2060channel, mail a@b.c", quietMentions("hi @bob and @channel, mail a@b.c"))
 }
 
 func TestReplyPostCapsCommits(t *testing.T) {

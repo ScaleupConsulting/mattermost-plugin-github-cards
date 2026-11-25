@@ -5,6 +5,7 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
+	"io/fs"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -50,7 +51,7 @@ func TestPayloadOwner(t *testing.T) {
 
 func mustRead(t *testing.T, name string) []byte {
 	t.Helper()
-	data, err := os.ReadFile(filepath.Join("testdata", "github", name))
+	data, err := fs.ReadFile(os.DirFS(filepath.Join("testdata", "github")), name)
 	require.NoError(t, err)
 	return data
 }

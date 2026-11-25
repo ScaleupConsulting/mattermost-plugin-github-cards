@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"testing"
@@ -20,10 +21,10 @@ func checkGolden(t *testing.T, name string, v any) {
 	got = append(got, '\n')
 	path := filepath.Join(goldenDir, name)
 	if os.Getenv("UPDATE_GOLDEN") == "1" {
-		require.NoError(t, os.MkdirAll(goldenDir, 0o755))
+		require.NoError(t, os.MkdirAll(goldenDir, 0o750))
 		require.NoError(t, os.WriteFile(path, got, 0o600))
 	}
-	want, err := os.ReadFile(path)
+	want, err := fs.ReadFile(os.DirFS(goldenDir), name)
 	require.NoError(t, err, "run with UPDATE_GOLDEN=1 to create %s", path)
 	require.JSONEq(t, string(want), string(got))
 }

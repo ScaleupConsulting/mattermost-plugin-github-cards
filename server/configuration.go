@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"slices"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -141,12 +142,7 @@ func parseRoute(line string) (route, error) {
 
 // isSupportedEvent reports whether name is one of the GitHub events this plugin renders.
 func isSupportedEvent(name string) bool {
-	for _, e := range supportedEvents {
-		if e == name {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(supportedEvents, name)
 }
 
 // parseConfiguration validates the raw settings and fills the derived fields.

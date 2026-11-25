@@ -37,7 +37,7 @@ var mentionRE = regexp.MustCompile(`(^|[^\w])@([\w.-])`)
 // quietMentions stops GitHub @handles in a body from notifying Mattermost users who happen to share
 // the name, and stops @channel or @here from paging a channel, by putting a word joiner after the @.
 func quietMentions(s string) string {
-	return mentionRE.ReplaceAllString(s, "$1@⁠$2")
+	return mentionRE.ReplaceAllString(s, "$1@\u2060$2")
 }
 
 // truncate shortens s to at most n bytes on a rune boundary, adding an ellipsis when it cuts.
@@ -220,8 +220,8 @@ func replyMarkdown(r *Reply) string {
 			fmt.Fprintf(&b, "\n- [`%s`](%s) %s (%s)", shortSHA(c.SHA), c.URL, escapeMarkdown(c.Message), escapeMarkdown(c.Author))
 		}
 	}
-	if body := strings.TrimSpace(r.Body); body != "" {
-		body, cut := truncate(body, maxFallbackBody)
+	if trimmed := strings.TrimSpace(r.Body); trimmed != "" {
+		body, cut := truncate(trimmed, maxFallbackBody)
 		if cut {
 			body += fmt.Sprintf(" [read more](%s)", r.URL)
 		}
