@@ -14,6 +14,10 @@ const OUT = path.resolve(process.argv[2] || 'out');
 const CHROME = process.env.CHROME || undefined;
 const VIEW = {width: 1280, height: 860};
 
+/**
+ * Logs a line with a wall-clock time, so the run can be matched to the server log.
+ * @param {...unknown} a - values to print
+ */
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
 /**

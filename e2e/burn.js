@@ -4,7 +4,17 @@ const {execFileSync} = require('child_process');
 const [dir, out] = process.argv.slice(2);
 const caps = JSON.parse(fs.readFileSync(`${dir}/captions.json`, 'utf8'));
 const W = 1280, H = 860, BAND = 64;
+/**
+ * Rounds seconds to whole centiseconds, the unit ASS timestamps use.
+ * @param {number} t - seconds
+ * @returns {number} centiseconds
+ */
 const cs = (t) => Math.round(t * 100);
+/**
+ * Formats centiseconds as an ASS timestamp.
+ * @param {number} c - centiseconds
+ * @returns {string} H:MM:SS.cc
+ */
 const fmt = (c) => `${Math.floor(c / 360000)}:${String(Math.floor(c / 6000) % 60).padStart(2, '0')}:${String(Math.floor(c / 100) % 60).padStart(2, '0')}.${String(c % 100).padStart(2, '0')}`;
 let prevEnd = 0;
 const events = caps.map((c, i) => {
