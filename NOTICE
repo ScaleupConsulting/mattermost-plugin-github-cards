@@ -1,0 +1,10 @@
+GitHub Cards plugin for Mattermost
+Copyright 2026 Scaleup Consulting
+
+This product is based on mattermost-plugin-starter-template
+(https://github.com/mattermost/mattermost-plugin-starter-template),
+Copyright (c) 2015-present Mattermost, Inc., licensed under the Apache License, Version 2.0.
+
+The GitHub webhook payloads under server/testdata/github are examples from
+octokit/webhooks (https://github.com/octokit/webhooks), Copyright (c) GitHub, Inc.
+and contributors, licensed under the MIT License.
